@@ -1,5 +1,4 @@
 from time import sleep
-import keyboard
 
 from beamngpy import BeamNGpy, Scenario, Vehicle
 from beamngpy.sensors import Electrics
@@ -42,12 +41,12 @@ vehicle.control(parkingbrake=0)
 steering = 0
 vehicle.control(steering=steering)
 target_drift_angle = -30
+global is_pressed
 
 while True:
     vehicle.sensors.poll()
-    event = keyboard.read_event()
 
-    if vehicle.sensors['electrics']['airspeed'] < 1 or event.event_type == keyboard.KEY_DOWN:
+    if vehicle.sensors['electrics']['airspeed'] < 1:
         continue
 
     vel_x = round(vehicle.sensors['state']['vel'][0], 3)
